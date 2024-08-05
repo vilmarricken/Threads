@@ -2,39 +2,40 @@ package br.gcb.tg.threads;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class ContadorController {
+public class Contador2 {
 
-	private Contador contador;
+	private AtomicInteger num = new AtomicInteger();
 
-	private int iteracoes;
-	
 	Runnable run = new Runnable() {
+
 		public void run() {
-			for (int i = 0; i < iteracoes; i++) {
-				contador.incrementar();
+			for (int i = 0; i < 10; i++) {
+				num.addAndGet(1);
 			}
 		}
 	};
-	
-	public ContadorController(Contador contador) {
-		this.contador = contador;
+
+	public static void main(String[] args) {
+		new Contador2().execute();
 	}
 
-	public Object contar(int iteracoes) {
-		this.iteracoes = iteracoes;
+	private void execute() {
 		List<Thread> threads = new ArrayList<Thread>();
 		for (int i = 0; i < 10; i++) {
 			Thread thread = new Thread(run);
 			threads.add(thread);
 			thread.start();
 		}
+
 		try {
-			Thread.sleep(1);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return contador.contador();
+
+		System.out.println(num);
 	}
 
 }
