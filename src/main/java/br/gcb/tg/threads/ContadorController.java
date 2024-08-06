@@ -5,23 +5,21 @@ import java.util.List;
 
 public class ContadorController {
 
-	private Contador contador;
-
-	Runnable run = new Runnable() {
-		public void run() {
-			for (int i = 0; i < 10; i++) {
-				contador.incrementar();
-			}
-		}
-	};
-	
-	public ContadorController(Contador contador) {
-		this.contador = contador;
+	public ContadorController() {
 	}
 
-	public Object contar(int iteracoes) {
+	public Object contar(final int iteracoes) {
+		final Contador contador = new Contador();
+		Runnable run = new Runnable() {
+			public void run() {
+				for (int i = 0; i < iteracoes; i++) {
+					contador.incrementar();
+				}
+			}
+		};
+
 		List<Thread> threads = new ArrayList<Thread>();
-		for (int i = 0; i < iteracoes; i++) {
+		for (int i = 0; i < 10; i++) {
 			Thread thread = new Thread(run);
 			threads.add(thread);
 			thread.start();
