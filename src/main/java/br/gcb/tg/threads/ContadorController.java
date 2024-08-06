@@ -8,7 +8,7 @@ public class ContadorController {
 	public ContadorController() {
 	}
 
-	public Object contar(final int iteracoes) {
+	public int contar(final int iteracoes) {
 		final Contador contador = new Contador();
 		Runnable run = new Runnable() {
 			public void run() {
