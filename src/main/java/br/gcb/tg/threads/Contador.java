@@ -1,15 +1,17 @@
 package br.gcb.tg.threads;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Contador {
 
-	private int num = 0;
+	private AtomicInteger num = new AtomicInteger();
 
-	public synchronized void incrementar() {
-		num = num + 1;
+	public void incrementar() {
+		num.incrementAndGet();
 	}
 
 	public int contador() {
-		return num;
+		return num.get();
 	}
 
 }
