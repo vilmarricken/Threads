@@ -4,7 +4,7 @@ public class Contador {
 
 	private int num = 0;
 
-	public void incrementar() {
+	public synchronized void incrementar() {
 		num = num + 1;
 	}
 

@@ -24,6 +24,15 @@ public class ContadorController {
 			threads.add(thread);
 			thread.start();
 		}
+		
+		threads.stream().forEach(thread -> {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+		
 		return contador.contador();
 	}
 
